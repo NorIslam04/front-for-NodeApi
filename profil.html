@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Utilisateur</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link href="profil.css" rel="stylesheet">
+
+</head>
+<body class="bg-light">
+    <div class="container profile-container">
+        <!-- En-tête du profil -->
+        <div class="profile-header text-center">
+            <div class="position-relative d-inline-block">
+                <img src="https://res.cloudinary.com/domyszt73/image/upload/v1737789153/ebtde60etd0g1rvd94dv.png" alt="Photo de profil" class="profile-avatar mb-3">
+                <button class="btn btn-light btn-sm rounded-circle edit-button" title="Modifier la photo">
+                    <i class="fas fa-camera"></i>
+                </button>
+            </div>
+            <h2 class="mb-2" id="userName">John Doe</h2>
+            <p class="text-muted mb-3" id="userEmail">john.doe@example.com</p>
+            <button class="btn btn-primary" onclick="toggleEditMode()">
+                <i class="fas fa-edit me-2"></i>Modifier le profil
+            </button>
+        </div>
+
+        <!-- Informations personnelles -->
+        <div class="card profile-card mb-4">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Informations personnelles</h5>
+            </div>
+            <div class="card-body">
+                <form id="profileForm">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Nom complet</label>
+                            <input type="text" class="form-control" id="fullName" placeholder="Votre nom" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Votre email" disabled>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Téléphone</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="Votre téléphone" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Date de naissance</label>
+                            <input type="date" class="form-control" id="birthDate" disabled>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Adresse</label>
+                        <textarea class="form-control" id="address" rows="2" placeholder="Votre adresse" disabled></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Bio</label>
+                        <textarea class="form-control" id="bio" rows="3" placeholder="Quelques mots à propos de vous" disabled></textarea>
+                    </div>
+                    <div class="text-end" id="formButtons" style="display: none;">
+                        <button type="button" class="btn btn-outline-secondary me-2" onclick="cancelEdit()">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Statistiques -->
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card profile-card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-calendar-check text-primary mb-3" style="font-size: 24px;"></i>
+                        <h3 class="mb-2">125</h3>
+                        <p class="text-muted mb-0">Commandes</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card profile-card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-star text-warning mb-3" style="font-size: 24px;"></i>
+                        <h3 class="mb-2">4.8</h3>
+                        <p class="text-muted mb-0">Note moyenne</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card profile-card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-heart text-danger mb-3" style="font-size: 24px;"></i>
+                        <h3 class="mb-2">47</h3>
+                        <p class="text-muted mb-0">Favoris</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
+    <script src="profil.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+.signup-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+.form-floating {
+    margin-bottom: 1rem;
+}
+.error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+@media screen and (max-width: 768px) {
+    .signup-container {
+        max-width: 90%;
+        margin: 30px auto;
+        padding: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .signup-container {
+        max-width: 100%;
+        margin: 20px auto;
+        padding: 10px;
+        box-shadow: none;
+    }
+    .form-floating {
+        margin-bottom: 0.75rem;
+    }
+    .error-message {
+        font-size: 0.8rem;
+    }
+}

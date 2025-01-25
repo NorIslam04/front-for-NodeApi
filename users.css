@@ -1,0 +1,107 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+  
+header {
+  background: #2c3e50;
+  color: #fff;
+  padding: 2rem;
+  text-align: center;
+}
+  
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+  
+header p {
+  font-size: 1.2rem;
+}
+  
+main {
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+  
+.user-list {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-x: auto; /* Pour les tableaux larges sur mobile */
+}
+  
+.user-list h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+  
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 300px;
+}
+  
+table th, table td {
+  padding: 0.8rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+  
+table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+  
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #34495e;
+  color: #fff;
+  margin-top: 2rem;
+}
+
+/* Media Queries pour la responsivité */
+@media screen and (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+  
+  header p {
+    font-size: 1rem;
+  }
+  
+  .user-list h2 {
+    font-size: 1.5rem;
+  }
+  
+  table th, table td {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  header {
+    padding: 1rem;
+  }
+  
+  header h1 {
+    font-size: 1.5rem;
+  }
+  
+  main {
+    padding: 0.5rem;
+  }
+  
+  table th, table td {
+    padding: 0.4rem;
+    font-size: 0.8rem;
+  }
+}
