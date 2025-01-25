@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion</title>
+  <link href="login.css" rel="stylesheet">
+</head>
+<body>
+  <div class="login-container">
+    <h2>Connexion</h2>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required>
+      <span id="emailError" class="error-message"></span>
+      <input type="password" id="password" placeholder="Mot de passe" required>
+      <span id="passwordError" class="error-message"></span>
+      <button type="submit" id="submitBtn">
+        <span id="buttonText">Se connecter</span>
+        <div id="loader" class="loader"></div>
+      </button>
+    </form>
+    <div id="message" class="message"></div>
+  </div>
+
+  <!-- Inclure Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>
