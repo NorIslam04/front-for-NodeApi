@@ -1,78 +1,48 @@
-const userdata = JSON.parse(localStorage.getItem('userData'));
-        // Simuler les données utilisateur
-        const userData = {
-            fullName: userdata.fullName,
-            email: userdata.email,
-            phone: '+33 6 12 34 56 78',
-            birthDate: '1990-01-01',
-            address: '123 Rue Example, 75001 Paris',
-            bio: 'Passionné par la technologie et l\'innovation.'
-        };
+document.addEventListener('DOMContentLoaded', function() {
+    const token = localStorage.getItem('token'); // Récupérer le token JWT
 
-        // Remplir le formulaire avec les données
-        function loadUserData() {
-            document.getElementById('fullName').value = userData.fullName;
-            document.getElementById('email').value = userData.email;
-            document.getElementById('phone').value = userData.phone;
-            document.getElementById('birthDate').value = userData.birthDate;
-            document.getElementById('address').value = userData.address;
-            document.getElementById('bio').value = userData.bio;
-            
-            // Mettre à jour l'en-tête
-            document.getElementById('userName').textContent = userData.fullName;
-            document.getElementById('userEmail').textContent = userData.email;
+    if (!token) {
+        console.error('Token non trouvé');
+        // Rediriger vers la page de connexion ou d'inscription si le token n'existe pas
+        window.location.href = 'sign_up.html';
+        return;
+    }
+    console.log('Token:', token);
+    // Vérifier la validité du token avec l'API
+    fetch('https://rest-api-express-livid.vercel.app/verifyToken', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}` // Envoyer le token dans l'en-tête
         }
-
-        // Activer/désactiver le mode édition
-        function toggleEditMode() {
-            const inputs = document.querySelectorAll('#profileForm input, #profileForm textarea');
-            const buttons = document.getElementById('formButtons');
-            inputs.forEach(input => {
-                input.disabled = !input.disabled;
-            });
-            buttons.style.display = buttons.style.display === 'none' ? 'block' : 'none';
+    })
+    .then(response => {// Vérifier si le token est valide
+        if (!response.ok) {
+            throw new Error('Token invalide ou expiré');
         }
+        return response.json();
+    })
+    .then(data => {
+        // Si le token est valide, charger les données du profil
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        loadUserData(userData);
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        localStorage.removeItem('token'); // Supprimer le token invalide
+        localStorage.removeItem('userData'); // Supprimer les données utilisateur
+    });
 
-        // Annuler les modifications
-        function cancelEdit() {
-            loadUserData();
-            toggleEditMode();
-        }
+    // Fonction pour charger les données du profil
+    function loadUserData(userData) {
+        document.getElementById('fullName').value = userData.fullName;
+        document.getElementById('email').value = userData.email;
+        document.getElementById('phone').value = userData.phone || '+33 6 12 34 56 78'; // Valeur par défaut
+        document.getElementById('birthDate').value = userData.birthDate || '1990-01-01'; // Valeur par défaut
+        document.getElementById('address').value = userData.address || '123 Rue Example, 75001 Paris'; // Valeur par défaut
+        document.getElementById('bio').value = userData.bio || 'Passionné par la technologie et l\'innovation.'; // Valeur par défaut
 
-        // Gérer la soumission du formulaire
-        document.getElementById('profileForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const updatedData = {
-                fullName: document.getElementById('fullName').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                birthDate: document.getElementById('birthDate').value,
-                address: document.getElementById('address').value,
-                bio: document.getElementById('bio').value
-            };
-
-            try {
-                // Simuler une requête API
-                // const response = await axios.put('http://localhost:3000/updateProfile', updatedData);
-                console.log('Profil mis à jour:', updatedData);
-                
-                // Mettre à jour les données locales
-                Object.assign(userData, updatedData);
-                
-                // Mettre à jour l'affichage
-                document.getElementById('userName').textContent = updatedData.fullName;
-                document.getElementById('userEmail').textContent = updatedData.email;
-                
-                // Désactiver le mode édition
-                toggleEditMode();
-                
-                alert('Profil mis à jour avec succès !');
-            } catch (error) {
-                console.error('Erreur lors de la mise à jour:', error);
-                alert('Erreur lors de la mise à jour du profil');
-            }
-        });
-
-        // Charger les données au chargement de la page
-        loadUserData();
+        // Mettre à jour l'en-tête
+        document.getElementById('userName').textContent = userData.fullName;
+        document.getElementById('userEmail').textContent = userData.email;
+    }
+});

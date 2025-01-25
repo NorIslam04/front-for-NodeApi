@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('https://node-express-apis-theta.vercel.app/usersDB')
+    fetch('https://rest-api-express-livid.vercel.app/usersDB')
       .then(response => response.json())
       .then(users => {
         const userTableBody = document.querySelector('#userTable tbody');

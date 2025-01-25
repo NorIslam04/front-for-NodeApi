@@ -39,28 +39,36 @@ document.getElementById('signupForm').addEventListener('submit', async function(
         isValid = false;
     }
     
-    if (isValid) {
+    if (isValid) {        
         try {
-            //ce shema il doivent être identiques avec le model de la base de données qui en a traiter dans userservice.js
             const userData = {
                 name,
                 email,
                 password
             };
             
-            const response = await axios.post('https://node-express-apis-theta.vercel.app/createUserDB', userData);
+            const response = await axios.post('https://rest-api-express-livid.vercel.app/createUserDB', userData);
 
-            localStorage.setItem('userData', JSON.stringify({
-                fullName: name,
-                email: email
-            }));
+            // Stocker le token JWT et les données utilisateur dans localStorage
+            if (response.data.token) {
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('userData', JSON.stringify({
+                    fullName: response.data.user.fullName,
+                    email: response.data.user.email,
+                    id: response.data.user.id
+                }));
+            }
+
+            // Rediriger vers la page de profil
             window.location.href = 'profil.html';
-
-            // Réinitialiser le formulaire
-            this.reset();
             
         } catch (error) {
-            alert('Erreur dans le API. Veuillez réessayer.');
-        }
+            console.error('Erreur API:', error);
+            if (error.response && error.response.data.message) {
+                alert('Erreur : ' + error.response.data.message);
+            } else {
+                alert('Erreur dans le API. Veuillez réessayer.');
+            }
+        } 
     }
 });
